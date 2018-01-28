@@ -11,4 +11,14 @@ This program is designed to implement various filters for pictures
 including but not limited to, box, gaussian, and sobel filters.
 """
 
-print("hello")
+import sys
+
+if len(sys.argv) > 3:
+    print("ERROR: too many arguments correct use is run.py [filter_name][kernel_size][image_path]")
+
+
+def main(filter, kernel_size):
+    return 0
+
+
+main(sys.argv[1], sys.argv[2])
