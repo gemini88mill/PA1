@@ -11,6 +11,10 @@ This program is designed to implement various filters for pictures
 including but not limited to, box, gaussian, and sobel filters.
 """
 
+"""
+run.py - run handles the running of the program, and handles the arguments coming from the command line. 
+"""
+
 import sys
 
 if len(sys.argv) > 3:
