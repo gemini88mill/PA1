@@ -17,15 +17,18 @@ run.py - run handles the running of the program, and handles the arguments comin
 
 import sys
 import filters
+import cv2
 
 # check for args incoming from cli
-if len(sys.argv) > 3:
+if len(sys.argv) > 4:
     print("ERROR: too many arguments correct use is run.py [filter_name][kernel_size][image_path]")
 
 
-def main(filter, kernel_size):
+def main(filter, kernel_size, image):
     """
     main function
+    reads the image coming from the image path cli arg
+
     handles the switch of argument/ perams for the PA1 program.
     accepts two arguments, filter and kernel_size
 
@@ -33,18 +36,21 @@ def main(filter, kernel_size):
     :returns success or failure value from dict filter
 
     """
+
+    image = cv2.imread(image, cv2.IMREAD_GRAYSCALE)
+
     return {
-        'box': filters.box(kernel_size),
-        'median': filters.median(kernel_size),
-        'guassian': filters.gaussian(kernel_size),
-        'gradient': filters.gradient(kernel_size),
-        'sobel': filters.sobel(kernel_size),
-        'fast_gaussian': filters.fast_gaussian(kernel_size),
-        'histogram': filters.histogram(kernel_size),
-        'thresholding': filters.thesholding(kernel_size)
+        'box': filters.box(kernel_size, image),
+        'median': filters.median(kernel_size, image),
+        'guassian': filters.gaussian(kernel_size, image),
+        'gradient': filters.gradient(kernel_size, image),
+        'sobel': filters.sobel(kernel_size, image),
+        'fast_gaussian': filters.fast_gaussian(kernel_size, image),
+        'histogram': filters.histogram(kernel_size, image),
+        'thresholding': filters.thesholding(kernel_size, image)
     }[filter]
 
 # collect value from main()
-res = main(sys.argv[1], sys.argv[2])
+res = main(sys.argv[1], sys.argv[2], sys.argv[3])
 # print("Status Code: ", res)
 sys.exit(res)
