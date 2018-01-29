@@ -6,20 +6,25 @@ def box(kernel_size, image):
     box - box filter function, takes the
     :param image:
     """
-    new_image = np.zeros((image.shape[0], image.shape[1]))
 
-    # for x in range(1, image.shape[0] - 1):
-    #     for y in range(1, image.shape[1] - 1):
-    curr = np.matrix(image[0:3], image[0:3])
-    print(curr)
+    kernel = np.ones((int(kernel_size), int(kernel_size)), np.float32)/(int(kernel_size)**2)
+    processed_image = cv2.filter2D(image, -1, kernel)
 
-    cv2.imshow('image', image)
+    cv2.imshow('image', processed_image)
+    cv2.imshow('original_image', image)
     cv2.waitKey(0)
 
     return 1
 
 
 def median(kernel_size, image):
+    """
+    median filter
+    """
+    
+    kernel = image[0:3, 0:3]
+    print(kernel)
+
     return 2
 
 
