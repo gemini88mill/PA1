@@ -24,8 +24,22 @@ def median(kernel_size, image):
     median_index = (int(kernel_size)**2 + 1)/2
     print(median_index)
 
-    
+    # kernel = np.zeros((int(kernel_size), int(kernel_size)), dtype=np.float32)
+    kernel = image[0:3, 0:3]
+    median = np.median(kernel)
+    print(median)
 
+    new_image = np.zeros((image.shape))
+    print(new_image)
+
+    for x in range(1, image.shape[0]):
+        for y in range(1, image.shape[1]):
+            kernel = image[x:(x+3), y:(y+3)]
+            new_image[x,y] = np.median(kernel)
+
+    cv2.imshow('median', new_image)
+    cv2.imshow('original', image)
+    cv2.waitKey(0)
 
     return 2
 
