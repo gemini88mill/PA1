@@ -21,9 +21,11 @@ def median(kernel_size, image):
     """
     median filter
     """
+    median_index = (int(kernel_size)**2 + 1)/2
+    print(median_index)
+
     
-    kernel = image[0:3, 0:3]
-    print(kernel)
+
 
     return 2
 
@@ -36,7 +38,22 @@ def gradient(kernel_size, image):
     return 4
 
 
-def sobel(kernel_size, image):
+def sobel(image):
+    kernel_horizontal = np.array(([-1,-2,-1],
+                                  [0, 0, 0],
+                                  [1, 2, 1]), dtype=int)
+
+    kernel_vertical = np.array(([-1,0,1],
+                                [-2,0,2],
+                                [-1,0,1]), dtype=int)
+
+    processed_image_h = cv2.filter2D(image, -1, kernel_horizontal)
+    processed_image_v = cv2.filter2D(image, -1, kernel_vertical)
+
+    cv2.imshow('horizontal', processed_image_h)
+    cv2.imshow('vertical', processed_image_v)
+    cv2.imshow('original', image)
+    cv2.waitKey(0)
     return 5
 
 
