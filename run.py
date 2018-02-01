@@ -54,7 +54,7 @@ def main(filter, kernel_size, image, sigma):
     if filter == 'box':
         return filters.box(kernel_size, image)
     elif filter == 'median':
-        return filters.median(kernel_size, image)
+        return filters.median(image)
     elif filter == 'gaussian':
         return filters.gaussian(kernel_size, sigma, image)
     elif filter == 'gradient':
@@ -66,7 +66,7 @@ def main(filter, kernel_size, image, sigma):
     elif filter == 'histogram':
         return filters.histogram(kernel_size, image)
     elif filter == 'thresholding':
-        return filters.thesholding(kernel_size, image)
+        return filters.thresholding(kernel_size, image)
     else:
         print("function not recognized")
         return 0

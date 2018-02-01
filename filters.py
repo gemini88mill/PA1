@@ -20,7 +20,7 @@ def box(kernel_size, image):
     return 1
 
 
-def median(kernel_size, image):
+def median(image):
     """
     median filter
     """
@@ -48,6 +48,10 @@ def median(kernel_size, image):
 
 
 def gaussian(kernel_size, sigma, image):
+    """
+    gaussian filter - implements a 2d gaussian filter and iterates over the image using the built in convolution
+    """
+
     interval = (2 * int(sigma) + 1.) / (int(kernel_size))
     x = np.linspace(-int(sigma) - interval / 2., int(sigma) + interval / 2., int(kernel_size) + 1)
     kern1d = np.diff(st.norm.cdf(x))
@@ -65,6 +69,11 @@ def gaussian(kernel_size, sigma, image):
 
 
 def gradient(image):
+    """
+    gradient filter - collects the image and applies a gradient filter over the image,
+    produces two images, one is a filter in the x direction, the other is a filter in the y direction
+    """
+
 
     new_image_x = np.diff(image, axis=1)
     new_image_y = np.diff(image, axis=0)
@@ -72,11 +81,6 @@ def gradient(image):
 
     grad_x = np.power(new_image_x, 2)
     grad_y = np.power(new_image_y, 2)
-
-    # grad_add = grad_y + grad_x
-    # grad_mag = np.sqrt(grad_add)
-
-    # print(grad_mag)
 
     cv2.imshow('x', new_image_x)
     cv2.imshow('y', new_image_y)
@@ -86,6 +90,11 @@ def gradient(image):
 
 
 def sobel(image):
+    """
+    sobel filter - implements two sobel filters, one in a vertical position and one in a horizontal position
+    convultion using the standard method linear filter.
+    """
+
     kernel_horizontal = np.array(([-1,-2,-1],
                                   [0, 0, 0],
                                   [1, 2, 1]), dtype=int)
@@ -111,9 +120,12 @@ def fast_gaussian(kernel_size, image, sigma):
 
 
 def histogram(bins, image):
-    # plt.plot(image)
-    # plt.ylabel('some numbers')
-    # plt.show()
+    """
+    histogram - creates a histogram without the histogram function built-in
+    function iterates over the array and assigns a value that would represent the
+    histogram bin, then a value in a histgram array is tallied and displayed using
+    the matplotlib functions.
+    """
 
     hist_array = np.zeros((int(bins) + 1), dtype=int)
     print(hist_array.shape)
@@ -135,7 +147,13 @@ def histogram(bins, image):
     return 7
 
 
-def thesholding(t_val, image):
+def thresholding(t_val, image):
+    """
+    Thresholding - the thresholding function implements a t_value in order to
+    create a threshold binary image. 1 for values above the t_val and 0 for values
+    under that threshold.
+    """
+
 
     bin_image = np.zeros(image.shape)
 
