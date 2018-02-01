@@ -104,6 +104,8 @@ def sobel(image):
 
 
 def fast_gaussian(kernel_size, image, sigma):
+    
+
     return 6
 
 

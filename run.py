@@ -61,7 +61,7 @@ def main(filter, kernel_size, image, sigma):
         return filters.gradient(image)
     elif filter == 'sobel':
         return filters.sobel(image)
-    elif filter == 'fast_guassian':
+    elif filter == 'fast_gaussian':
         return filters.fast_gaussian(kernel_size, image, sigma)
     elif filter == 'histogram':
         return filters.histogram(kernel_size, image)
