@@ -135,5 +135,17 @@ def histogram(bins, image):
     return 7
 
 
-def thesholding(kernel_size, image):
+def thesholding(t_val, image):
+
+    bin_image = np.zeros(image.shape)
+
+    for x in range(0, image.shape[0]):
+        for y in range(0, image.shape[1]):
+            if image[x,y] > int(t_val):
+                bin_image[x,y] = 1
+
+    cv2.imshow('bin image', bin_image)
+    cv2.imshow('original', image)
+    cv2.waitKey(0)
+
     return 8
