@@ -20,11 +20,11 @@ import filters
 import cv2
 
 # check for args incoming from cli
-if len(sys.argv) > 4:
+if len(sys.argv) > 5:
     print("ERROR: too many arguments correct use is run.py [filter_name][kernel_size][image_path]")
 
 
-def main(filter, kernel_size, image):
+def main(filter, kernel_size, image, sigma):
     """
     main function
     reads the image coming from the image path cli arg
@@ -55,8 +55,8 @@ def main(filter, kernel_size, image):
         return filters.box(kernel_size, image)
     elif filter == 'median':
         return filters.median(kernel_size, image)
-    elif filter == 'guassian':
-        return filters.gaussian(kernel_size, image)
+    elif filter == 'gaussian':
+        return filters.gaussian(kernel_size, sigma, image)
     elif filter == 'gradient':
         return filters.gradient(kernel_size, image)
     elif filter == 'sobel':
@@ -72,6 +72,6 @@ def main(filter, kernel_size, image):
         return 0
 
 # collect value from main()
-res = main(sys.argv[1], sys.argv[2], sys.argv[3])
+res = main(sys.argv[1], sys.argv[2], sys.argv[3], sys.argv[4])
 # print("Status Code: ", res)
 sys.exit(res)

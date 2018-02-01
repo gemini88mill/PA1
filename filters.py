@@ -1,5 +1,7 @@
 import numpy as np
 import cv2
+import scipy.stats as st
+
 
 def box(kernel_size, image):
     """
@@ -25,12 +27,12 @@ def median(kernel_size, image):
     print(median_index)
 
     # kernel = np.zeros((int(kernel_size), int(kernel_size)), dtype=np.float32)
-    kernel = image[0:3, 0:3]
-    median = np.median(kernel)
-    print(median)
+    # kernel = image[0:3, 0:3]
+    # median = np.median(kernel)
+    # print(median)
 
     new_image = np.zeros((image.shape))
-    print(new_image)
+    # print(new_image)
 
     for x in range(1, image.shape[0]):
         for y in range(1, image.shape[1]):
@@ -44,7 +46,20 @@ def median(kernel_size, image):
     return 2
 
 
-def gaussian(kernel_size, image):
+def gaussian(kernel_size, sigma, image):
+    interval = (2 * int(sigma) + 1.) / (int(kernel_size))
+    x = np.linspace(-int(sigma) - interval / 2., int(sigma) + interval / 2., int(kernel_size) + 1)
+    kern1d = np.diff(st.norm.cdf(x))
+    kernel_raw = np.sqrt(np.outer(kern1d, kern1d))
+    kernel = kernel_raw / kernel_raw.sum()
+    kernel.reshape(int(kernel_size), int(kernel_size))
+
+
+    processed_image = cv2.filter2D(image, -1, kernel)
+
+    cv2.imshow('image', processed_image)
+    cv2.imshow('original_image', image)
+    cv2.waitKey(0)
     return 3
 
 
