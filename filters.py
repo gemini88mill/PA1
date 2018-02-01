@@ -1,6 +1,7 @@
 import numpy as np
 import cv2
 import scipy.stats as st
+import matplotlib.pyplot as plt
 
 
 def box(kernel_size, image):
@@ -104,12 +105,33 @@ def sobel(image):
 
 
 def fast_gaussian(kernel_size, image, sigma):
-    
+
 
     return 6
 
 
-def histogram(kernel_size, image):
+def histogram(bins, image):
+    # plt.plot(image)
+    # plt.ylabel('some numbers')
+    # plt.show()
+
+    hist_array = np.zeros((int(bins) + 1), dtype=int)
+    print(hist_array.shape)
+    divisor = round((np.amax(image) / int(bins)))
+    print(divisor)
+
+
+    for x in range(0, image.shape[0]):
+        for y in range(0, image.shape[1]):
+            value = image[x,y] / int(divisor)
+            hist_array[int(value)] += 1
+
+    x_bar = np.arange(len(hist_array))
+
+    plt.bar(x_bar, hist_array)
+    # plt.xticks(len(hist_array), hist_array)
+    plt.show()
+
     return 7
 
 
