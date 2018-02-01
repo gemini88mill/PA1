@@ -23,8 +23,8 @@ def median(kernel_size, image):
     """
     median filter
     """
-    median_index = (int(kernel_size)**2 + 1)/2
-    print(median_index)
+    # median_index = (int(kernel_size)**2 + 1)/2
+    # print(median_index)
 
     # kernel = np.zeros((int(kernel_size), int(kernel_size)), dtype=np.float32)
     # kernel = image[0:3, 0:3]
@@ -63,7 +63,24 @@ def gaussian(kernel_size, sigma, image):
     return 3
 
 
-def gradient(kernel_size, image):
+def gradient(image):
+
+    new_image_x = np.diff(image, axis=1)
+    new_image_y = np.diff(image, axis=0)
+
+
+    grad_x = np.power(new_image_x, 2)
+    grad_y = np.power(new_image_y, 2)
+
+    # grad_add = grad_y + grad_x
+    # grad_mag = np.sqrt(grad_add)
+
+    # print(grad_mag)
+
+    cv2.imshow('x', new_image_x)
+    cv2.imshow('y', new_image_y)
+    cv2.waitKey(0)
+
     return 4
 
 
@@ -86,7 +103,7 @@ def sobel(image):
     return 5
 
 
-def fast_gaussian(kernel_size, image):
+def fast_gaussian(kernel_size, image, sigma):
     return 6
 
 

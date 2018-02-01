@@ -58,11 +58,11 @@ def main(filter, kernel_size, image, sigma):
     elif filter == 'gaussian':
         return filters.gaussian(kernel_size, sigma, image)
     elif filter == 'gradient':
-        return filters.gradient(kernel_size, image)
+        return filters.gradient(image)
     elif filter == 'sobel':
         return filters.sobel(image)
     elif filter == 'fast_guassian':
-        return filters.fast_gaussian(kernel_size, image)
+        return filters.fast_gaussian(kernel_size, image, sigma)
     elif filter == 'histogram':
         return filters.histogram(kernel_size, image)
     elif filter == 'thresholding':
